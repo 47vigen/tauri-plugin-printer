@@ -2,7 +2,7 @@ import { invoke } from "@tauri-apps/api/core"
 import { WebviewWindow } from "@tauri-apps/api/webview"
 import { fetch } from "@tauri-apps/plugin-http"
 import { Buffer } from "buffer"
-import * as _html2canvas from "html2canvas"
+import html2canvas from "html2canvas"
 import jsPDF from "jspdf"
 import mime from "mime"
 // import { toDataURL as qrCodeToDataUrl } from "qrcode"
@@ -16,8 +16,6 @@ import {
   Printer,
   ResponseResult
 } from "./types"
-
-const html2canvas: any = _html2canvas
 
 const parseIfJSON = (str: string, dft: any = []): any => {
   try {
