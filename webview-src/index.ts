@@ -1,6 +1,6 @@
-import { ResponseType, getClient } from "@tauri-apps/api/http"
-import { invoke } from "@tauri-apps/api/tauri"
-import { WebviewWindow } from "@tauri-apps/api/window"
+import { invoke } from "@tauri-apps/api/core"
+import { WebviewWindow } from "@tauri-apps/api/webview"
+import { fetch } from "@tauri-apps/plugin-http"
 import { Buffer } from "buffer"
 import * as _html2canvas from "html2canvas"
 import JsBarcode from "jsbarcode"
@@ -143,13 +143,18 @@ export const print = async (
         throw new Error("Image required {url}")
       const image: any = document.createElement("img")
       ;(image.width = 100), (image.height = 100)
-      const client = await getClient()
-      const response: any = await client.get(item.url, {
-        responseType: ResponseType.Binary
-      })
+
+      // const client = await getClient();
+      // const response: any = await client.get(item.url, {
+      //     responseType: ResponseType.Binary
+      // });
+
+      const response = await (
+        await (await fetch(item.url)).blob()
+      ).arrayBuffer()
 
       image.src = `data:${mime.getType(item.url)};base64,${Buffer.from(
-        response.data
+        response
       ).toString("base64")}`
       if (item.width) {
         image.width = item.width
