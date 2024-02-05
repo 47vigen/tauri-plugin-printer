@@ -3,10 +3,9 @@ import { WebviewWindow } from "@tauri-apps/api/webview"
 import { fetch } from "@tauri-apps/plugin-http"
 import { Buffer } from "buffer"
 import * as _html2canvas from "html2canvas"
-import JsBarcode from "jsbarcode"
 import jsPDF from "jspdf"
 import mime from "mime"
-import { toDataURL as qrCodeToDataUrl } from "qrcode"
+// import { toDataURL as qrCodeToDataUrl } from "qrcode"
 import { jobStatus } from "./constants"
 import {
   Jobs,
@@ -240,76 +239,76 @@ export const print = async (
       container.appendChild(tableWrapper)
     }
 
-    if (item.type == "qrCode") {
-      const wrapperImage = document.createElement("div")
-      wrapperImage.style.width = "100%"
-      if (item?.position == "center") {
-        wrapperImage.style.display = "flex"
-        wrapperImage.style.justifyContent = "center"
-      }
-      const image = document.createElement("img")
-      const canvas = document.createElement("canvas")
-      image.src = await new Promise((rs, rj) => {
-        qrCodeToDataUrl(canvas, item.value ? item.value : "", (err, url) => {
-          if (err) rj(err)
-          rs(url)
-        })
-      })
+    // if (item.type == "qrCode") {
+    //   const wrapperImage = document.createElement("div")
+    //   wrapperImage.style.width = "100%"
+    //   if (item?.position == "center") {
+    //     wrapperImage.style.display = "flex"
+    //     wrapperImage.style.justifyContent = "center"
+    //   }
+    //   const image = document.createElement("img")
+    //   const canvas = document.createElement("canvas")
+    //   image.src = await new Promise((rs, rj) => {
+    //     qrCodeToDataUrl(canvas, item.value ? item.value : "", (err, url) => {
+    //       if (err) rj(err)
+    //       rs(url)
+    //     })
+    //   })
 
-      if (item.width) {
-        image.width = item.width
-      }
+    //   if (item.width) {
+    //     image.width = item.width
+    //   }
 
-      if (item.height) {
-        image.height = item.height
-      }
+    //   if (item.height) {
+    //     image.height = item.height
+    //   }
 
-      if (item.style) {
-        const styles = item.style as any
-        for (const style of Object.keys(styles)) {
-          const key = style as any
-          image.style[key] = styles[key]
-        }
-      }
+    //   if (item.style) {
+    //     const styles = item.style as any
+    //     for (const style of Object.keys(styles)) {
+    //       const key = style as any
+    //       image.style[key] = styles[key]
+    //     }
+    //   }
 
-      wrapperImage.appendChild(image)
+    //   wrapperImage.appendChild(image)
 
-      container.appendChild(wrapperImage)
-    }
+    //   container.appendChild(wrapperImage)
+    // }
 
-    if (item.type == "barCode") {
-      const wrapperImage = document.createElement("div")
-      wrapperImage.style.width = "100%"
-      if (item?.position == "center") {
-        wrapperImage.style.display = "flex"
-        wrapperImage.style.justifyContent = "center"
-      }
-      const image = document.createElement("img")
-      JsBarcode(image, item.value ? item.value : "", {
-        width: item.width ? item.width : 4,
-        height: item.height ? item.height : 40,
-        displayValue: item.displayValue
-      })
+    // if (item.type == "barCode") {
+    //   const wrapperImage = document.createElement("div")
+    //   wrapperImage.style.width = "100%"
+    //   if (item?.position == "center") {
+    //     wrapperImage.style.display = "flex"
+    //     wrapperImage.style.justifyContent = "center"
+    //   }
+    //   const image = document.createElement("img")
+    //   JsBarcode(image, item.value ? item.value : "", {
+    //     width: item.width ? item.width : 4,
+    //     height: item.height ? item.height : 40,
+    //     displayValue: item.displayValue
+    //   })
 
-      image.style.objectFit = "contain"
-      image.style.width = "100%"
+    //   image.style.objectFit = "contain"
+    //   image.style.width = "100%"
 
-      if (item.height) {
-        image.height = item.height
-      }
+    //   if (item.height) {
+    //     image.height = item.height
+    //   }
 
-      if (item.style) {
-        const styles = item.style as any
-        for (const style of Object.keys(styles)) {
-          const key = style as any
-          image.style[key] = styles[key]
-        }
-      }
+    //   if (item.style) {
+    //     const styles = item.style as any
+    //     for (const style of Object.keys(styles)) {
+    //       const key = style as any
+    //       image.style[key] = styles[key]
+    //     }
+    //   }
 
-      wrapperImage.appendChild(image)
+    //   wrapperImage.appendChild(image)
 
-      container.appendChild(wrapperImage)
-    }
+    //   container.appendChild(wrapperImage)
+    // }
   }
 
   const body = document.createElement("body")
