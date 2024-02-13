@@ -62,4 +62,4 @@ export const jobStatus = {
     name: "Spooling",
     description: "The print job is spooling."
   }
-}
+} as const

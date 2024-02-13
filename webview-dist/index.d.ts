@@ -1,16 +1,10 @@
-import { Jobs, PrintData, PrintFileOptions, PrintOptions, Printer, ResponseResult } from "./types";
+import { Jobs, Printer, ResponseResult, PrintFileOptions } from "./types";
 /**
  * Get list printers.
  *
  * @returns A array of printer detail.
  */
 export declare const printers: (id?: string | null) => Promise<Printer[]>;
-/**
- * Print.
- * @params first_param:dataprint, second_param: Print Options
- * @returns A process status.
- */
-export declare const print: (data: PrintData[], options: PrintOptions) => Promise<ResponseResult>;
 /**
  * Print File.
  * @params first_param: File Path, second_param: Print Setting
