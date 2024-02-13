@@ -17,7 +17,7 @@
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "11.1.6",
-    "@tauri-apps/api": "^2.0.0-alpha.13",
+    "@tauri-apps/api": "2.0.0-beta.0",
     "@types/node": "^20.11.17",
     "rollup": "4.9.6",
     "typescript": "5.3.3"
@@ -25,5 +25,8 @@
   "dependencies": {
     "buffer": "^6.0.3",
     "tslib": "^2.6.2"
+  },
+  "peerDependencies": {
+    "@tauri-apps/api": "2.0.0-beta.0"
   }
 }
