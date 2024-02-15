@@ -166,7 +166,7 @@ export const print_file = async (
       Math.random() * 100000000
     )}_${Date.now()}.pdf`
     tempPath = await invoke("plugin:printer|create_temp_file", {
-      buffer_data: options.file.toString("base64"),
+      bufferData: options.file.toString("base64"),
       filename
     })
 
@@ -176,8 +176,8 @@ export const print_file = async (
   const optionsParams: any = {
     id: `"${id}"`,
     path: options.path,
-    printer_setting: printerSettingStr,
-    remove_after_print: options.remove_temp ? options.remove_temp : true
+    printerSetting: printerSettingStr,
+    removeAfterPrint: options.remove_temp ? options.remove_temp : true
   }
 
   if (typeof options.file != "undefined") {
