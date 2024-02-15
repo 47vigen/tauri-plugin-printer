@@ -1,12 +1,7 @@
 import { nodeResolve } from "@rollup/plugin-node-resolve"
-import terser from "@rollup/plugin-terser"
 import typescript from "@rollup/plugin-typescript"
-import commonjs from "@rollup/plugin-commonjs"
+import terser from "@rollup/plugin-terser"
 
-// @ts-check
-/**
- * @type {import("rollup").RollupOptions}
- */
 export default {
   input: "./webview-src/index.ts",
   output: {
@@ -17,7 +12,6 @@ export default {
   },
   plugins: [
     nodeResolve(),
-    commonjs(),
     terser(),
     typescript({
       tsconfig: "./webview-src/tsconfig.json",
