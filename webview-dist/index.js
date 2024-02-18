@@ -1,1 +1,466 @@
-import{webcrypto as e}from"node:crypto";function t(e,t,n,r){return new(n||(n=Promise))((function(i,o){function a(e){try{u(r.next(e))}catch(e){o(e)}}function s(e){try{u(r.throw(e))}catch(e){o(e)}}function u(e){var t;e.done?i(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(a,s)}u((r=r.apply(e,t||[])).next())}))}function n(e,t){var n,r,i,o,a={label:0,sent:function(){if(1&i[0])throw i[1];return i[1]},trys:[],ops:[]};return o={next:s(0),throw:s(1),return:s(2)},"function"==typeof Symbol&&(o[Symbol.iterator]=function(){return this}),o;function s(s){return function(u){return function(s){if(n)throw new TypeError("Generator is already executing.");for(;o&&(o=0,s[0]&&(a=0)),a;)try{if(n=1,r&&(i=2&s[0]?r.return:s[0]?r.throw||((i=r.return)&&i.call(r),0):r.next)&&!(i=i.call(r,s[1])).done)return i;switch(r=0,i&&(s=[2&s[0],i.value]),s[0]){case 0:case 1:i=s;break;case 4:return a.label++,{value:s[1],done:!1};case 5:a.label++,r=s[1],s=[0];continue;case 7:s=a.ops.pop(),a.trys.pop();continue;default:if(!(i=a.trys,(i=i.length>0&&i[i.length-1])||6!==s[0]&&2!==s[0])){a=0;continue}if(3===s[0]&&(!i||s[1]>i[0]&&s[1]<i[3])){a.label=s[1];break}if(6===s[0]&&a.label<i[1]){a.label=i[1],i=s;break}if(i&&a.label<i[2]){a.label=i[2],a.ops.push(s);break}i[2]&&a.ops.pop(),a.trys.pop();continue}s=t.call(e,a)}catch(e){s=[6,e],r=0}finally{n=i=0}if(5&s[0])throw s[1];return{value:s[0]?s[1]:void 0,done:!0}}([s,u])}}}async function r(e,t={},n){return window.__TAURI_INTERNALS__.invoke(e,t,n)}"function"==typeof SuppressedError&&SuppressedError,"function"==typeof SuppressedError&&SuppressedError;var i={512:{name:"Completed",description:"An error condition, possibly on a print job that precedes this one in the queue, blocked the print job."},4096:{name:"Completed",description:"The print job is complete, including any post-printing processing."},256:{name:"Deleted",description:"The print job was deleted from the queue, typically after printing."},4:{name:"Deleting",description:"The print job is in the process of being deleted."},2:{name:"Error",description:"The print job is in an error state."},0:{name:"None",description:"The print job has no specified state."},32:{name:"Offline",description:"The printer is offline."},64:{name:"PaperOut",description:"The printer is out of the required paper size."},1:{name:"Paused",description:"The print job is paused."},128:{name:"Printed",description:"The print job printed."},16:{name:"Printing",description:"The print job is now printing."},2048:{name:"Restarted",description:"The print job was blocked but has restarted."},8192:{name:"Retained",description:"The print job is retained in the print queue after printing."},1024:{name:"UserIntervention",description:"The printer requires user action to fix an error condition."},8:{name:"Spooling",description:"The print job is spooling."}};const o=128;let a,s;function u(t=21){var n;n=t-=0,!a||a.length<n?(a=Buffer.allocUnsafe(n*o),e.getRandomValues(a),s=0):s+n>a.length&&(e.getRandomValues(a),s=0),s+=n;let r="";for(let e=s-t;e<s;e++)r+="useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict"[63&a[e]];return r}var l=function(e){return"function"==typeof atob?atob(e):""},p=function(e){return"function"==typeof btoa?btoa(e):""},c=function(e,t){void 0===t&&(t=[]);try{return JSON.parse(e)}catch(e){return t}},d=function(e){return void 0===e&&(e=null),t(void 0,void 0,void 0,(function(){var t,i,o,a,s,u,d;return n(this,(function(n){switch(n.label){case 0:return null==e?[3,2]:[4,r("plugin:printer|get_printers_by_name",{printername:l(e)})];case 1:return t=n.sent(),null==(u=c(t,null))?[2,[]]:[2,[{id:e,name:u.Name,driver_name:u.DriverName,job_count:u.JobCount,print_processor:u.PrintProcessor,port_name:u.PortName,share_name:u.ShareName,computer_name:u.ComputerName,printer_status:u.PrinterStatus,shared:u.Shared,type:u.Type,priority:u.Priority}]];case 2:return[4,r("plugin:printer|get_printers")];case 3:for(i=n.sent(),o=c(i),a=[],s=0;s<o.length;s++)u=o[s],d=p(u.Name),a.push({id:d,name:u.Name,driver_name:u.DriverName,job_count:u.JobCount,print_processor:u.PrintProcessor,port_name:u.PortName,share_name:u.ShareName,computer_name:u.ComputerName,printer_status:u.PrinterStatus,shared:u.Shared,type:u.Type,priority:u.Priority});return[2,a]}}))}))},m=function(e){return t(void 0,void 0,void 0,(function(){var t,i,o,a,s,p,c,d,m,b,g,h,f;return n(this,(function(n){switch(n.label){case 0:if(!e.id&&!e.name)throw new Error("print_file require id | name as string");if(!e.path&&!e.base64)throw new Error("print_file require parameter path as string | base64");if(t="",t=void 0!==e.id?l(e.id):e.name,i={paper:"A4",method:"simplex",scale:"noscale",orientation:"portrait",repeat:1},void 0!==(null===(d=null==e?void 0:e.print_setting)||void 0===d?void 0:d.paper)&&(i.paper=e.print_setting.paper),void 0!==(null===(m=null==e?void 0:e.print_setting)||void 0===m?void 0:m.method)&&(i.method=e.print_setting.method),void 0!==(null===(b=null==e?void 0:e.print_setting)||void 0===b?void 0:b.scale)&&(i.scale=e.print_setting.scale),void 0!==(null===(g=null==e?void 0:e.print_setting)||void 0===g?void 0:g.orientation)&&(i.orientation=e.print_setting.orientation),void 0!==(null===(h=null==e?void 0:e.print_setting)||void 0===h?void 0:h.repeat)&&(i.repeat=e.print_setting.repeat),void 0!==(null===(f=null==e?void 0:e.print_setting)||void 0===f?void 0:f.range)&&(i.range=e.print_setting.range),void 0!==e.path){if(e.path.split(".").length<=1)throw new Error("File not supported");if("pdf"!=e.path.split(".").pop())throw new Error("File not supported")}if(o="",i.range)if("string"==typeof i.range){if(!new RegExp(/^[0-9,]+$/).test(i.range))throw new Error("Invalid range value ");o=","!=i.range[i.range.length-1]?i.range:i.range.substring(0,i.range.length-1)}else i.range.from&&(o="".concat(i.range.from,"-").concat(i.range.to));return a="-print-settings ".concat(o,",").concat(i.paper,",").concat(i.method,",").concat(i.scale,",").concat(i.orientation,",").concat(i.repeat,"x"),s="",e.base64?(p="".concat(u(),".pdf"),[4,r("plugin:printer|create_temp_file",{bufferData:e.base64,filename:p})]):[3,2];case 1:if(!(s=n.sent()))throw new Error("Fail to create temp file");n.label=2;case 2:return c={id:'"'.concat(t,'"'),path:e.path,printerSetting:a,removeAfterPrint:!e.remove_temp||e.remove_temp},e.base64&&(c.path=s),[4,r("plugin:printer|print_pdf",c)];case 3:return n.sent(),[2,{success:!0,message:"OK"}]}}))}))},b=function(e){return void 0===e&&(e=null),t(void 0,void 0,void 0,(function(){var t,o,a,s,u,l,m,b,g,h,f,v,_,j,y,S,w;return n(this,(function(n){switch(n.label){case 0:return t=[],null==e?[3,3]:[4,d(e)];case 1:return 0==(m=n.sent()).length?[2,[]]:[4,r("plugin:printer|get_jobs",{printername:m[0].name})];case 2:for(b=n.sent(),null==(g=c(b,[])).length&&(g=[g]),o=0,a=g;o<a.length;o++)v=a[o],_=p("".concat(m[0].name,"_@_").concat(v.Id)),t.push({id:_,job_id:v.Id,job_status:null!=i[v.JobStatus]?{code:v.JobStatus,description:i[v.JobStatus].description,name:i[v.JobStatus].name}:{code:v.JobStatus,description:"Unknown Job Status",name:"Unknown"},computer_name:v.ComputerName,data_type:v.Datatype,document_name:v.DocumentName,job_time:v.JobTime,pages_printed:v.PagesPrinted,position:v.Position,printer_name:v.PrinterName,priority:v.Priority,size:v.Size,submitted_time:v.SubmittedTime?+(null===(y=null===(j=v.SubmittedTime)||void 0===j?void 0:j.replace("/Date(",""))||void 0===y?void 0:y.replace(")/","")):null,total_pages:v.TotalPages,username:v.UserName});return[2,t];case 3:return[4,d()];case 4:s=n.sent(),u=0,l=s,n.label=5;case 5:return u<l.length?[4,r("plugin:printer|get_jobs",{printername:(m=l[u]).name})]:[3,8];case 6:for(b=n.sent(),null==(g=c(b,[])).length&&(g=[g]),h=0,f=g;h<f.length;h++)v=f[h],_=p("".concat(m.name,"_@_").concat(v.Id)),t.push({id:_,job_id:v.Id,job_status:null!=i[v.JobStatus]?{code:v.JobStatus,description:i[v.JobStatus].description,name:i[v.JobStatus].name}:{code:v.JobStatus,description:"Unknown Job Status",name:"Unknown"},computer_name:v.ComputerName,data_type:v.Datatype,document_name:v.DocumentName,job_time:v.JobTime,pages_printed:v.PagesPrinted,position:v.Position,printer_name:v.PrinterName,priority:v.Priority,size:v.Size,submitted_time:v.SubmittedTime?+(null===(w=null===(S=v.SubmittedTime)||void 0===S?void 0:S.replace("/Date(",""))||void 0===w?void 0:w.replace(")/","")):null,total_pages:v.TotalPages,username:v.UserName});n.label=7;case 7:return u++,[3,5];case 8:return[2,t]}}))}))},g=function(e){return t(void 0,void 0,void 0,(function(){var t,o,a,s,u,p,d,m,b;return n(this,(function(n){switch(n.label){case 0:return t=l(e),o=t.split("_@_"),a=o[0],s=void 0===a?null:a,u=o[1],[4,r("plugin:printer|get_jobs_by_id",{printername:s,jobid:void 0===u?null:u})];case 1:return p=n.sent(),d=c(p,null),[2,{id:e,job_id:d.Id,job_status:null!=i[d.JobStatus]?{code:d.JobStatus,description:i[d.JobStatus].description,name:i[d.JobStatus].name}:{code:d.JobStatus,description:"Unknown Job Status",name:"Unknown"},computer_name:d.ComputerName,data_type:d.Datatype,document_name:d.DocumentName,job_time:d.JobTime,pages_printed:d.PagesPrinted,position:d.Position,printer_name:d.PrinterName,priority:d.Priority,size:d.Size,submitted_time:d.SubmittedTime?+(null===(b=null===(m=d.SubmittedTime)||void 0===m?void 0:m.replace("/Date(",""))||void 0===b?void 0:b.replace(")/","")):null,total_pages:d.TotalPages,username:d.UserName}]}}))}))},h=function(e){return void 0===e&&(e=null),t(void 0,void 0,void 0,(function(){var t,i,o,a,s,u,p,m,b,g,h,f,v,_,j,y,S;return n(this,(function(n){switch(n.label){case 0:if(n.trys.push([0,11,,12]),t={success:!0,message:"OK"},null==e)return[3,2];if(i=l(e),o=i.split("_@_"),a=o[0],s=void 0===a?null:a,u=o[1],p=void 0===u?null:u,null==s||null==p)throw new Error("Wrong jobid");return[4,r("plugin:printer|restart_job",{printername:s,jobid:p.toString()})];case 1:return n.sent(),[2,t];case 2:return[4,d()];case 3:m=n.sent(),b=0,g=m,n.label=4;case 4:return b<g.length?[4,r("plugin:printer|get_jobs",{printername:(h=g[b]).name})]:[3,10];case 5:f=n.sent(),v=c(f,[]),_=0,j=v,n.label=6;case 6:return _<j.length?(y=j[_],[4,r("plugin:printer|restart_job",{printername:h.name,jobid:y.Id.toString()})]):[3,9];case 7:n.sent(),n.label=8;case 8:return _++,[3,6];case 9:return b++,[3,4];case 10:return[2,t];case 11:return[2,{success:!1,message:(S=n.sent()).message?S.message:"Fail to restart job"}];case 12:return[2]}}))}))},f=function(e){return void 0===e&&(e=null),t(void 0,void 0,void 0,(function(){var t,i,o,a,s,u,p,m,b,g,h,f,v,_,j,y,S;return n(this,(function(n){switch(n.label){case 0:if(n.trys.push([0,11,,12]),t={success:!0,message:"OK"},null==e)return[3,2];if(i=l(e),o=i.split("_@_"),a=o[0],s=void 0===a?null:a,u=o[1],p=void 0===u?null:u,null==s||null==p)throw new Error("Wrong jobid");return[4,r("plugin:printer|resume_job",{printername:s,jobid:p.toString()})];case 1:return n.sent(),[2,t];case 2:return[4,d()];case 3:m=n.sent(),b=0,g=m,n.label=4;case 4:return b<g.length?[4,r("plugin:printer|get_jobs",{printername:(h=g[b]).name})]:[3,10];case 5:f=n.sent(),v=c(f),_=0,j=v,n.label=6;case 6:return _<j.length?(y=j[_],[4,r("plugin:printer|resume_job",{printername:h.name,jobid:y.Id.toString()})]):[3,9];case 7:n.sent(),n.label=8;case 8:return _++,[3,6];case 9:return b++,[3,4];case 10:return[2,t];case 11:return[2,{success:!1,message:(S=n.sent()).message?S.message:"Fail to resume job"}];case 12:return[2]}}))}))},v=function(e){return void 0===e&&(e=null),t(void 0,void 0,void 0,(function(){var t,i,o,a,s,u,p,m,b,g,h,f,v,_,j,y,S;return n(this,(function(n){switch(n.label){case 0:if(n.trys.push([0,11,,12]),t={success:!0,message:"OK"},null==e)return[3,2];if(i=l(e),o=i.split("_@_"),a=o[0],s=void 0===a?null:a,u=o[1],p=void 0===u?null:u,null==s||null==p)throw new Error("Wrong jobid");return[4,r("plugin:printer|pause_job",{printername:s,jobid:p.toString()})];case 1:return n.sent(),[2,t];case 2:return[4,d()];case 3:m=n.sent(),b=0,g=m,n.label=4;case 4:return b<g.length?[4,r("plugin:printer|get_jobs",{printername:(h=g[b]).name})]:[3,10];case 5:f=n.sent(),v=c(f),_=0,j=v,n.label=6;case 6:return _<j.length?(y=j[_],[4,r("plugin:printer|pause_job",{printername:h.name,jobid:y.Id.toString()})]):[3,9];case 7:n.sent(),n.label=8;case 8:return _++,[3,6];case 9:return b++,[3,4];case 10:return[2,t];case 11:return[2,{success:!1,message:(S=n.sent()).message?S.message:"Fail to pause job"}];case 12:return[2]}}))}))},_=function(e){return void 0===e&&(e=null),t(void 0,void 0,void 0,(function(){var t,i,o,a,s,u,p,m,b,g,h,f,v,_,j,y,S;return n(this,(function(n){switch(n.label){case 0:if(n.trys.push([0,11,,12]),t={success:!0,message:"OK"},null==e)return[3,2];if(i=l(e),o=i.split("_@_"),a=o[0],s=void 0===a?null:a,u=o[1],p=void 0===u?null:u,null==s||null==p)throw new Error("Wrong jobid");return[4,r("plugin:printer|remove_job",{printername:s,jobid:p.toString()})];case 1:return n.sent(),[2,t];case 2:return[4,d()];case 3:m=n.sent(),b=0,g=m,n.label=4;case 4:return b<g.length?[4,r("plugin:printer|get_jobs",{printername:(h=g[b]).name})]:[3,10];case 5:f=n.sent(),v=c(f),_=0,j=v,n.label=6;case 6:return _<j.length?(y=j[_],[4,r("plugin:printer|remove_job",{printername:h.name,jobid:y.Id.toString()})]):[3,9];case 7:n.sent(),n.label=8;case 8:return _++,[3,6];case 9:return b++,[3,4];case 10:return[2,t];case 11:return[2,{success:!1,message:(S=n.sent()).message?S.message:"Fail to pause job"}];case 12:return[2]}}))}))};export{g as getJob,b as getJobs,d as getPrinters,v as pauseJob,m as printFile,_ as removeJob,h as restartJob,f as resumeJob};
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.removeJob = exports.pauseJob = exports.resumeJob = exports.restartJob = exports.getJob = exports.getJobs = exports.printFile = exports.getPrinters = void 0;
+const core_1 = require("@tauri-apps/api/core");
+const constants_1 = require("./constants");
+const nanoid_1 = require("nanoid");
+const utils_1 = require("./utils");
+/**
+ * Get list printers.
+ *
+ * @returns A array of printer detail.
+ */
+const getPrinters = async (id = null) => {
+    if (id != null) {
+        const printername = (0, utils_1.decodeBase64)(id);
+        const result = await (0, core_1.invoke)("plugin:printer|get_printers_by_name", {
+            printername
+        });
+        const item = (0, utils_1.parseIfJSON)(result, null);
+        if (item == null)
+            return [];
+        return [
+            {
+                id,
+                name: item.Name,
+                driver_name: item.DriverName,
+                job_count: item.JobCount,
+                print_processor: item.PrintProcessor,
+                port_name: item.PortName,
+                share_name: item.ShareName,
+                computer_name: item.ComputerName,
+                printer_status: item.PrinterStatus,
+                shared: item.Shared,
+                type: item.Type,
+                priority: item.Priority
+            }
+        ];
+    }
+    const result = await (0, core_1.invoke)("plugin:printer|get_printers");
+    const listRaw = (0, utils_1.parseIfJSON)(result);
+    const printers = [];
+    for (let i = 0; i < listRaw.length; i++) {
+        const item = listRaw[i];
+        const id = (0, utils_1.encodeBase64)(item.Name);
+        printers.push({
+            id,
+            name: item.Name,
+            driver_name: item.DriverName,
+            job_count: item.JobCount,
+            print_processor: item.PrintProcessor,
+            port_name: item.PortName,
+            share_name: item.ShareName,
+            computer_name: item.ComputerName,
+            printer_status: item.PrinterStatus,
+            shared: item.Shared,
+            type: item.Type,
+            priority: item.Priority
+        });
+    }
+    return printers;
+};
+exports.getPrinters = getPrinters;
+/**
+ * Print File.
+ * @params first_param: File Path, second_param: Print Setting
+ * @returns A process status.
+ */
+const printFile = async (options) => {
+    if (!options.id && !options.name) {
+        throw new Error("print_file require id | name as string");
+    }
+    if (!options.path && !options.base64) {
+        throw new Error("print_file require parameter path as string | base64");
+    }
+    let id = "";
+    if (typeof options.id != "undefined") {
+        id = (0, utils_1.decodeBase64)(options.id);
+    }
+    else {
+        id = options.name;
+    }
+    const printerSettings = {
+        paper: "A4",
+        method: "simplex",
+        scale: "noscale",
+        orientation: "portrait",
+        repeat: 1
+    };
+    if (typeof options?.print_setting?.paper != "undefined")
+        printerSettings.paper = options.print_setting.paper;
+    if (typeof options?.print_setting?.method != "undefined")
+        printerSettings.method = options.print_setting.method;
+    if (typeof options?.print_setting?.scale != "undefined")
+        printerSettings.scale = options.print_setting.scale;
+    if (typeof options?.print_setting?.orientation != "undefined")
+        printerSettings.orientation = options.print_setting.orientation;
+    if (typeof options?.print_setting?.repeat != "undefined")
+        printerSettings.repeat = options.print_setting.repeat;
+    if (typeof options?.print_setting?.range != "undefined")
+        printerSettings.range = options.print_setting.range;
+    if (typeof options.path != "undefined") {
+        if (options.path.split(".").length <= 1)
+            throw new Error("File not supported");
+        if (options.path.split(".").pop() != "pdf")
+            throw new Error("File not supported");
+    }
+    let rangeStr = "";
+    if (printerSettings.range) {
+        if (typeof printerSettings.range == "string") {
+            if (!new RegExp(/^[0-9,]+$/).test(printerSettings.range)) {
+                throw new Error("Invalid range value ");
+            }
+            rangeStr =
+                printerSettings.range[printerSettings.range.length - 1] != ","
+                    ? printerSettings.range
+                    : printerSettings.range.substring(0, printerSettings.range.length - 1);
+        }
+        else if (printerSettings.range.from) {
+            rangeStr = `${printerSettings.range.from}-${printerSettings.range.to}`;
+        }
+    }
+    const printerSettingStr = `-print-settings ${rangeStr},${printerSettings.paper},${printerSettings.method},${printerSettings.scale},${printerSettings.orientation},${printerSettings.repeat}x`;
+    let tempPath = "";
+    if (options.base64) {
+        const filename = `${(0, nanoid_1.nanoid)()}.pdf`;
+        tempPath = await (0, core_1.invoke)("plugin:printer|create_temp_file", {
+            bufferData: options.base64,
+            filename
+        });
+        if (!tempPath) {
+            throw new Error("Fail to create temp file");
+        }
+    }
+    const optionsParams = {
+        id: `"${id}"`,
+        path: options.path,
+        printerSetting: printerSettingStr,
+        removeAfterPrint: options.remove_temp ? options.remove_temp : true
+    };
+    if (options.base64) {
+        optionsParams.path = tempPath;
+    }
+    await (0, core_1.invoke)("plugin:printer|print_pdf", optionsParams);
+    return {
+        success: true,
+        message: "OK"
+    };
+};
+exports.printFile = printFile;
+/**
+ * Get all jobs.
+ * @returns A array of all printer jobs.
+ */
+const getJobs = async (printerid = null) => {
+    const allJobs = [];
+    if (printerid != null) {
+        const printer = await (0, exports.getPrinters)(printerid);
+        if (printer.length == 0)
+            return [];
+        const result = await (0, core_1.invoke)("plugin:printer|get_jobs", {
+            printername: printer[0].name
+        });
+        let listRawJobs = (0, utils_1.parseIfJSON)(result, []);
+        if (listRawJobs.length == undefined)
+            listRawJobs = [listRawJobs];
+        for (const job of listRawJobs) {
+            const id = (0, utils_1.encodeBase64)(`${printer[0].name}_@_${job.Id}`);
+            allJobs.push({
+                id,
+                job_id: job.Id,
+                job_status: constants_1.jobStatus[job.JobStatus] != undefined
+                    ? {
+                        code: job.JobStatus,
+                        description: constants_1.jobStatus[job.JobStatus]
+                            .description,
+                        name: constants_1.jobStatus[job.JobStatus].name
+                    }
+                    : {
+                        code: job.JobStatus,
+                        description: "Unknown Job Status",
+                        name: "Unknown"
+                    },
+                computer_name: job.ComputerName,
+                data_type: job.Datatype,
+                document_name: job.DocumentName,
+                job_time: job.JobTime,
+                pages_printed: job.PagesPrinted,
+                position: job.Position,
+                printer_name: job.PrinterName,
+                priority: job.Priority,
+                size: job.Size,
+                submitted_time: job.SubmittedTime
+                    ? +job.SubmittedTime?.replace("/Date(", "")?.replace(")/", "")
+                    : null,
+                total_pages: job.TotalPages,
+                username: job.UserName
+            });
+        }
+        return allJobs;
+    }
+    const listPrinter = await (0, exports.getPrinters)();
+    for (const printer of listPrinter) {
+        const result = await (0, core_1.invoke)("plugin:printer|get_jobs", {
+            printername: printer.name
+        });
+        let listRawJobs = (0, utils_1.parseIfJSON)(result, []);
+        if (listRawJobs.length == undefined)
+            listRawJobs = [listRawJobs];
+        for (const job of listRawJobs) {
+            const id = (0, utils_1.encodeBase64)(`${printer.name}_@_${job.Id}`);
+            allJobs.push({
+                id,
+                job_id: job.Id,
+                job_status: constants_1.jobStatus[job.JobStatus] != undefined
+                    ? {
+                        code: job.JobStatus,
+                        description: constants_1.jobStatus[job.JobStatus]
+                            .description,
+                        name: constants_1.jobStatus[job.JobStatus].name
+                    }
+                    : {
+                        code: job.JobStatus,
+                        description: "Unknown Job Status",
+                        name: "Unknown"
+                    },
+                computer_name: job.ComputerName,
+                data_type: job.Datatype,
+                document_name: job.DocumentName,
+                job_time: job.JobTime,
+                pages_printed: job.PagesPrinted,
+                position: job.Position,
+                printer_name: job.PrinterName,
+                priority: job.Priority,
+                size: job.Size,
+                submitted_time: job.SubmittedTime
+                    ? +job.SubmittedTime?.replace("/Date(", "")?.replace(")/", "")
+                    : null,
+                total_pages: job.TotalPages,
+                username: job.UserName
+            });
+        }
+    }
+    return allJobs;
+};
+exports.getJobs = getJobs;
+/**
+ * Get job by id.
+ * @returns Printer job.
+ */
+const getJob = async (jobid) => {
+    const idextract = (0, utils_1.decodeBase64)(jobid);
+    const [printername = null, id = null] = idextract.split("_@_");
+    if (printername == null || id == null)
+        null;
+    const result = await (0, core_1.invoke)("plugin:printer|get_jobs_by_id", {
+        printername: printername,
+        jobid: id
+    });
+    const job = (0, utils_1.parseIfJSON)(result, null);
+    return {
+        id: jobid,
+        job_id: job.Id,
+        job_status: constants_1.jobStatus[job.JobStatus] != undefined
+            ? {
+                code: job.JobStatus,
+                description: constants_1.jobStatus[job.JobStatus].description,
+                name: constants_1.jobStatus[job.JobStatus].name
+            }
+            : {
+                code: job.JobStatus,
+                description: "Unknown Job Status",
+                name: "Unknown"
+            },
+        computer_name: job.ComputerName,
+        data_type: job.Datatype,
+        document_name: job.DocumentName,
+        job_time: job.JobTime,
+        pages_printed: job.PagesPrinted,
+        position: job.Position,
+        printer_name: job.PrinterName,
+        priority: job.Priority,
+        size: job.Size,
+        submitted_time: job.SubmittedTime
+            ? +job.SubmittedTime?.replace("/Date(", "")?.replace(")/", "")
+            : null,
+        total_pages: job.TotalPages,
+        username: job.UserName
+    };
+};
+exports.getJob = getJob;
+/**
+ * Restart jobs.
+ * @param jobid
+ */
+const restartJob = async (jobid = null) => {
+    try {
+        const result = {
+            success: true,
+            message: "OK"
+        };
+        if (jobid != null) {
+            const idextract = (0, utils_1.decodeBase64)(jobid);
+            const [printername = null, id = null] = idextract.split("_@_");
+            if (printername == null || id == null)
+                throw new Error("Wrong jobid");
+            await (0, core_1.invoke)("plugin:printer|restart_job", {
+                printername,
+                jobid: id.toString()
+            });
+            return result;
+        }
+        const listPrinter = await (0, exports.getPrinters)();
+        for (const printer of listPrinter) {
+            const result = await (0, core_1.invoke)("plugin:printer|get_jobs", {
+                printername: printer.name
+            });
+            const listRawJobs = (0, utils_1.parseIfJSON)(result, []);
+            for (const job of listRawJobs) {
+                await (0, core_1.invoke)("plugin:printer|restart_job", {
+                    printername: printer.name,
+                    jobid: job.Id.toString()
+                });
+            }
+        }
+        return result;
+    }
+    catch (err) {
+        return {
+            success: false,
+            message: err.message ? err.message : "Fail to restart job"
+        };
+    }
+};
+exports.restartJob = restartJob;
+/**
+ * Resume jobs.
+ * @param jobid
+ */
+const resumeJob = async (jobid = null) => {
+    try {
+        const result = {
+            success: true,
+            message: "OK"
+        };
+        if (jobid != null) {
+            const idextract = (0, utils_1.decodeBase64)(jobid);
+            const [printername = null, id = null] = idextract.split("_@_");
+            if (printername == null || id == null)
+                throw new Error("Wrong jobid");
+            await (0, core_1.invoke)("plugin:printer|resume_job", {
+                printername,
+                jobid: id.toString()
+            });
+            return result;
+        }
+        const listPrinter = await (0, exports.getPrinters)();
+        for (const printer of listPrinter) {
+            const result = await (0, core_1.invoke)("plugin:printer|get_jobs", {
+                printername: printer.name
+            });
+            const listRawJobs = (0, utils_1.parseIfJSON)(result);
+            for (const job of listRawJobs) {
+                await (0, core_1.invoke)("plugin:printer|resume_job", {
+                    printername: printer.name,
+                    jobid: job.Id.toString()
+                });
+            }
+        }
+        return result;
+    }
+    catch (err) {
+        return {
+            success: false,
+            message: err.message ? err.message : "Fail to resume job"
+        };
+    }
+};
+exports.resumeJob = resumeJob;
+/**
+ * Pause jobs.
+ * @param jobid
+ */
+const pauseJob = async (jobid = null) => {
+    try {
+        const result = {
+            success: true,
+            message: "OK"
+        };
+        if (jobid != null) {
+            const idextract = (0, utils_1.decodeBase64)(jobid);
+            const [printername = null, id = null] = idextract.split("_@_");
+            if (printername == null || id == null)
+                throw new Error("Wrong jobid");
+            await (0, core_1.invoke)("plugin:printer|pause_job", {
+                printername,
+                jobid: id.toString()
+            });
+            return result;
+        }
+        const listPrinter = await (0, exports.getPrinters)();
+        for (const printer of listPrinter) {
+            const result = await (0, core_1.invoke)("plugin:printer|get_jobs", {
+                printername: printer.name
+            });
+            const listRawJobs = (0, utils_1.parseIfJSON)(result);
+            for (const job of listRawJobs) {
+                await (0, core_1.invoke)("plugin:printer|pause_job", {
+                    printername: printer.name,
+                    jobid: job.Id.toString()
+                });
+            }
+        }
+        return result;
+    }
+    catch (err) {
+        return {
+            success: false,
+            message: err.message ? err.message : "Fail to pause job"
+        };
+    }
+};
+exports.pauseJob = pauseJob;
+/**
+ * Remove jobs.
+ * @param jobid
+ */
+const removeJob = async (jobid = null) => {
+    try {
+        const result = {
+            success: true,
+            message: "OK"
+        };
+        if (jobid != null) {
+            const idextract = (0, utils_1.decodeBase64)(jobid);
+            const [printername = null, id = null] = idextract.split("_@_");
+            if (printername == null || id == null)
+                throw new Error("Wrong jobid");
+            await (0, core_1.invoke)("plugin:printer|remove_job", {
+                printername,
+                jobid: id.toString()
+            });
+            return result;
+        }
+        const listPrinter = await (0, exports.getPrinters)();
+        for (const printer of listPrinter) {
+            const result = await (0, core_1.invoke)("plugin:printer|get_jobs", {
+                printername: printer.name
+            });
+            const listRawJobs = (0, utils_1.parseIfJSON)(result);
+            for (const job of listRawJobs) {
+                await (0, core_1.invoke)("plugin:printer|remove_job", {
+                    printername: printer.name,
+                    jobid: job.Id.toString()
+                });
+            }
+        }
+        return result;
+    }
+    catch (err) {
+        return {
+            success: false,
+            message: err.message ? err.message : "Fail to pause job"
+        };
+    }
+};
+exports.removeJob = removeJob;
