@@ -1,5 +1,4 @@
 import { invoke } from "@tauri-apps/api/core"
-import { Buffer } from "buffer"
 import { jobStatus } from "./constants"
 import { nanoid } from "nanoid"
 import {
@@ -9,32 +8,7 @@ import {
   ResponseResult,
   PrintFileOptions
 } from "./types"
-
-const parseIfJSON = (str: string, dft: any = []): any => {
-  try {
-    return JSON.parse(str)
-  } catch (error) {
-    return dft
-  }
-}
-const encodeBase64 = (str: string): string => {
-  if (typeof window === "undefined") {
-    // in nodejs
-    return Buffer.from(str, "utf-8").toString("base64")
-  } else {
-    // in browser
-    return window.btoa(str)
-  }
-}
-const decodeBase64 = (str: string): string => {
-  if (typeof window === "undefined") {
-    // in nodejs
-    return Buffer.from(str, "base64").toString("utf-8")
-  } else {
-    // in browser
-    return window.atob(str)
-  }
-}
+import { decodeBase64, parseIfJSON, encodeBase64 } from "./utils"
 
 /**
  * Get list printers.
