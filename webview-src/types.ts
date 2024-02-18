@@ -46,7 +46,7 @@ export type PrintFileOptions = {
   id?: string
   name?: string
   path?: string
-  file?: Buffer
+  file?: Buffer | ArrayBuffer
   print_setting?: PrintSettings
   remove_temp?: boolean
 }

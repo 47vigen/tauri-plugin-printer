@@ -1,6 +1,7 @@
 import { invoke } from "@tauri-apps/api/core"
 import { Buffer } from "buffer"
 import { jobStatus } from "./constants"
+import { nanoid } from "nanoid"
 import {
   Jobs,
   Printer,
@@ -40,7 +41,7 @@ const decodeBase64 = (str: string): string => {
  *
  * @returns A array of printer detail.
  */
-export const printers = async (
+export const getPrinters = async (
   id: string | null = null
 ): Promise<Printer[]> => {
   if (id != null) {
@@ -98,15 +99,19 @@ export const printers = async (
  * @params first_param: File Path, second_param: Print Setting
  * @returns A process status.
  */
-export const print_file = async (
+export const printFile = async (
   options: PrintFileOptions
 ): Promise<ResponseResult> => {
-  if (options.id == undefined && options.name == undefined)
+  if (!options.id && !options.name) {
     throw new Error("print_file require id | name as string")
-  if (options.path == undefined && options.file == undefined)
+  }
+
+  if (!options.path && !options.file) {
     throw new Error(
       "print_file require parameter path as string | file as Buffer"
     )
+  }
+
   let id: string | undefined = ""
 
   if (typeof options.id != "undefined") {
@@ -114,6 +119,7 @@ export const print_file = async (
   } else {
     id = options.name
   }
+
   const printerSettings: PrintSettings = {
     paper: "A4",
     method: "simplex",
@@ -140,11 +146,14 @@ export const print_file = async (
     if (options.path.split(".").pop() != "pdf")
       throw new Error("File not supported")
   }
+
   let rangeStr = ""
   if (printerSettings.range) {
     if (typeof printerSettings.range == "string") {
-      if (!new RegExp(/^[0-9,]+$/).test(printerSettings.range))
+      if (!new RegExp(/^[0-9,]+$/).test(printerSettings.range)) {
         throw new Error("Invalid range value ")
+      }
+
       rangeStr =
         printerSettings.range[printerSettings.range.length - 1] != ","
           ? printerSettings.range
@@ -157,20 +166,25 @@ export const print_file = async (
   const printerSettingStr = `-print-settings ${rangeStr},${printerSettings.paper},${printerSettings.method},${printerSettings.scale},${printerSettings.orientation},${printerSettings.repeat}x`
 
   let tempPath: string = ""
-  if (typeof options.file != "undefined") {
-    const fileSignature = options.file.subarray(0, 4).toString("hex")
-    if (fileSignature != "25504446") throw new Error("File not supported")
-    if (Buffer.isBuffer(options.file) == false)
-      throw new Error("Invalid buffer")
-    const filename: string = `${Math.floor(
-      Math.random() * 100000000
-    )}_${Date.now()}.pdf`
-    tempPath = await invoke("plugin:printer|create_temp_file", {
-      bufferData: options.file.toString("base64"),
+  if (options.file) {
+    const file =
+      options.file instanceof Buffer ? options.file : Buffer.from(options.file)
+
+    const fileSignature = file.subarray(0, 4).toString("hex")
+
+    if (fileSignature != "25504446") {
+      throw new Error("File not supported")
+    }
+
+    const filename: string = `${nanoid()}.pdf`
+    tempPath = await invoke<string>("plugin:printer|create_temp_file", {
+      bufferData: file.toString("base64"),
       filename
     })
 
-    if (tempPath.length == 0) throw new Error("Fail to create temp file")
+    if (!tempPath) {
+      throw new Error("Fail to create temp file")
+    }
   }
 
   const optionsParams: any = {
@@ -180,7 +194,7 @@ export const print_file = async (
     removeAfterPrint: options.remove_temp ? options.remove_temp : true
   }
 
-  if (typeof options.file != "undefined") {
+  if (options.file) {
     optionsParams.path = tempPath
   }
 
@@ -196,12 +210,12 @@ export const print_file = async (
  * Get all jobs.
  * @returns A array of all printer jobs.
  */
-export const jobs = async (
+export const getJobs = async (
   printerid: string | null = null
 ): Promise<Jobs[]> => {
   const allJobs: Jobs[] = []
   if (printerid != null) {
-    const printer = await printers(printerid)
+    const printer = await getPrinters(printerid)
     if (printer.length == 0) return []
     const result: any = await invoke("plugin:printer|get_jobs", {
       printername: printer[0].name
@@ -245,7 +259,7 @@ export const jobs = async (
     }
     return allJobs
   }
-  const listPrinter = await printers()
+  const listPrinter = await getPrinters()
   for (const printer of listPrinter) {
     const result: any = await invoke("plugin:printer|get_jobs", {
       printername: printer.name
@@ -296,7 +310,7 @@ export const jobs = async (
  * Get job by id.
  * @returns Printer job.
  */
-export const job = async (jobid: string): Promise<Jobs | null> => {
+export const getJob = async (jobid: string): Promise<Jobs | null> => {
   const idextract = decodeBase64(jobid)
   const [printername = null, id = null] = idextract.split("_@_")
   if (printername == null || id == null) null
@@ -342,7 +356,7 @@ export const job = async (jobid: string): Promise<Jobs | null> => {
  * Restart jobs.
  * @param jobid
  */
-export const restart_job = async (
+export const restartJob = async (
   jobid: string | null = null
 ): Promise<ResponseResult> => {
   try {
@@ -364,7 +378,7 @@ export const restart_job = async (
       return result
     }
 
-    const listPrinter = await printers()
+    const listPrinter = await getPrinters()
     for (const printer of listPrinter) {
       const result: any = await invoke("plugin:printer|get_jobs", {
         printername: printer.name
@@ -391,7 +405,7 @@ export const restart_job = async (
  * Resume jobs.
  * @param jobid
  */
-export const resume_job = async (
+export const resumeJob = async (
   jobid: string | null = null
 ): Promise<ResponseResult> => {
   try {
@@ -412,7 +426,7 @@ export const resume_job = async (
       return result
     }
 
-    const listPrinter = await printers()
+    const listPrinter = await getPrinters()
     for (const printer of listPrinter) {
       const result: any = await invoke("plugin:printer|get_jobs", {
         printername: printer.name
@@ -439,7 +453,7 @@ export const resume_job = async (
  * Pause jobs.
  * @param jobid
  */
-export const pause_job = async (
+export const pauseJob = async (
   jobid: string | null = null
 ): Promise<ResponseResult> => {
   try {
@@ -460,7 +474,7 @@ export const pause_job = async (
       return result
     }
 
-    const listPrinter = await printers()
+    const listPrinter = await getPrinters()
     for (const printer of listPrinter) {
       const result: any = await invoke("plugin:printer|get_jobs", {
         printername: printer.name
@@ -487,7 +501,7 @@ export const pause_job = async (
  * Remove jobs.
  * @param jobid
  */
-export const remove_job = async (
+export const removeJob = async (
   jobid: string | null = null
 ): Promise<ResponseResult> => {
   try {
@@ -508,7 +522,7 @@ export const remove_job = async (
       return result
     }
 
-    const listPrinter = await printers()
+    const listPrinter = await getPrinters()
     for (const printer of listPrinter) {
       const result: any = await invoke("plugin:printer|get_jobs", {
         printername: printer.name
