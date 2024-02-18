@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api/core"
+import { Buffer } from "buffer"
 import { jobStatus } from "./constants"
 import { nanoid } from "nanoid"
 import {
@@ -8,7 +9,7 @@ import {
   ResponseResult,
   PrintFileOptions
 } from "./types"
-import { decodeBase64, parseIfJSON, encodeBase64 } from "./utils"
+import { decodeBase64, parseIfJSON, encodeBase64 } from "utils"
 
 /**
  * Get list printers.
@@ -80,8 +81,10 @@ export const printFile = async (
     throw new Error("print_file require id | name as string")
   }
 
-  if (!options.path && !options.base64) {
-    throw new Error("print_file require parameter path as string | base64")
+  if (!options.path && !options.file) {
+    throw new Error(
+      "print_file require parameter path as string | file as Buffer"
+    )
   }
 
   let id: string | undefined = ""
@@ -138,10 +141,19 @@ export const printFile = async (
   const printerSettingStr = `-print-settings ${rangeStr},${printerSettings.paper},${printerSettings.method},${printerSettings.scale},${printerSettings.orientation},${printerSettings.repeat}x`
 
   let tempPath: string = ""
-  if (options.base64) {
+  if (options.file) {
+    const file =
+      options.file instanceof Buffer ? options.file : Buffer.from(options.file)
+
+    const fileSignature = file.subarray(0, 4).toString("hex")
+
+    if (fileSignature != "25504446") {
+      throw new Error("File not supported")
+    }
+
     const filename: string = `${nanoid()}.pdf`
     tempPath = await invoke<string>("plugin:printer|create_temp_file", {
-      bufferData: options.base64,
+      bufferData: file.toString("base64"),
       filename
     })
 
@@ -157,7 +169,7 @@ export const printFile = async (
     removeAfterPrint: options.remove_temp ? options.remove_temp : true
   }
 
-  if (options.base64) {
+  if (options.file) {
     optionsParams.path = tempPath
   }
 

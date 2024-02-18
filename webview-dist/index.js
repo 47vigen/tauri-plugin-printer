@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeJob = exports.pauseJob = exports.resumeJob = exports.restartJob = exports.getJob = exports.getJobs = exports.printFile = exports.getPrinters = void 0;
 const core_1 = require("@tauri-apps/api/core");
+const buffer_1 = require("buffer");
 const constants_1 = require("./constants");
 const nanoid_1 = require("nanoid");
-const utils_1 = require("./utils");
+const utils_1 = require("utils");
 /**
  * Get list printers.
  *
@@ -69,8 +70,8 @@ const printFile = async (options) => {
     if (!options.id && !options.name) {
         throw new Error("print_file require id | name as string");
     }
-    if (!options.path && !options.base64) {
-        throw new Error("print_file require parameter path as string | base64");
+    if (!options.path && !options.file) {
+        throw new Error("print_file require parameter path as string | file as Buffer");
     }
     let id = "";
     if (typeof options.id != "undefined") {
@@ -121,10 +122,15 @@ const printFile = async (options) => {
     }
     const printerSettingStr = `-print-settings ${rangeStr},${printerSettings.paper},${printerSettings.method},${printerSettings.scale},${printerSettings.orientation},${printerSettings.repeat}x`;
     let tempPath = "";
-    if (options.base64) {
+    if (options.file) {
+        const file = options.file instanceof buffer_1.Buffer ? options.file : buffer_1.Buffer.from(options.file);
+        const fileSignature = file.subarray(0, 4).toString("hex");
+        if (fileSignature != "25504446") {
+            throw new Error("File not supported");
+        }
         const filename = `${(0, nanoid_1.nanoid)()}.pdf`;
         tempPath = await (0, core_1.invoke)("plugin:printer|create_temp_file", {
-            bufferData: options.base64,
+            bufferData: file.toString("base64"),
             filename
         });
         if (!tempPath) {
@@ -137,7 +143,7 @@ const printFile = async (options) => {
         printerSetting: printerSettingStr,
         removeAfterPrint: options.remove_temp ? options.remove_temp : true
     };
-    if (options.base64) {
+    if (options.file) {
         optionsParams.path = tempPath;
     }
     await (0, core_1.invoke)("plugin:printer|print_pdf", optionsParams);
