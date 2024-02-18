@@ -1,6 +1,6 @@
 {
   "name": "tauri-plugin-printer-api",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "author": "47vigen",
   "description": "Tauri Printer API",
   "browser": "webview-dist/index.js",
