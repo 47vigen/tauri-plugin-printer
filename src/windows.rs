@@ -76,9 +76,9 @@ pub fn print_pdf(options: PrintOptions) -> Result<String, Error> {
         .output()
         .expect("Failed to execute command");
 
-    if options.remove_after_print {
-        let _ = remove_file(&options.path);
-    }
+    // if options.remove_after_print {
+    //     let _ = remove_file(&options.path);
+    // }
 
     Ok(String::from_utf8_lossy(&output.stdout).to_string())
 }

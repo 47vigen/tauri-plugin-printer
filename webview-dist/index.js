@@ -141,13 +141,11 @@ const printFile = async (options) => {
     }
     const optionsParams = {
         id: `"${id}"`,
-        path: options.path,
+        path: tempPath ?? options.path,
         printerSetting: printerSettingStr,
         removeAfterPrint: options.remove_temp ? options.remove_temp : true
     };
-    if (options.file) {
-        optionsParams.path = tempPath;
-    }
+    console.log("🚀 ~ optionsParams:", optionsParams);
     await (0, core_1.invoke)("plugin:printer|print_pdf", optionsParams);
     return {
         success: true,
