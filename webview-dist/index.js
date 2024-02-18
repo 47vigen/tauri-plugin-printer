@@ -5,7 +5,7 @@ const core_1 = require("@tauri-apps/api/core");
 const buffer_1 = require("buffer");
 const constants_1 = require("./constants");
 const nanoid_1 = require("nanoid");
-const utils_1 = require("utils");
+const utils_1 = require("./utils");
 /**
  * Get list printers.
  *
@@ -143,7 +143,7 @@ const printFile = async (options) => {
         id: `"${id}"`,
         path: tempPath ?? options.path,
         printerSetting: printerSettingStr,
-        removeAfterPrint: options.remove_temp ? options.remove_temp : true
+        removeAfterPrint: options.remove_temp ?? true
     };
     console.log("🚀 ~ optionsParams:", optionsParams);
     await (0, core_1.invoke)("plugin:printer|print_pdf", optionsParams);

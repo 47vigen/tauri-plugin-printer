@@ -170,7 +170,7 @@ export const printFile = async (
     id: `"${id}"`,
     path: tempPath ?? options.path,
     printerSetting: printerSettingStr,
-    removeAfterPrint: options.remove_temp ? options.remove_temp : true
+    removeAfterPrint: options.remove_temp ?? true
   }
 
   console.log("🚀 ~ optionsParams:", optionsParams)
