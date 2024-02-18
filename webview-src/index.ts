@@ -152,10 +152,14 @@ export const printFile = async (
     }
 
     const filename: string = `${nanoid()}.pdf`
+    console.log("🚀 ~ filename:", filename)
+
     tempPath = await invoke<string>("plugin:printer|create_temp_file", {
       bufferData: file.toString("base64"),
       filename
     })
+
+    console.log("🚀 ~ tempPath:", tempPath)
 
     if (!tempPath) {
       throw new Error("Fail to create temp file")
