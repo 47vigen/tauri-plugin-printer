@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export declare type ScaleOption = "noscale" | "shrink" | "fit";
 export declare type MethodOption = "duplex" | "duplexshort" | "simplex";
 export declare type PaperOption = "A2" | "A3" | "A4" | "A5" | "A6" | "letter" | "legal" | "tabloid";
@@ -35,7 +34,7 @@ export declare type PrintFileOptions = {
     id?: string;
     name?: string;
     path?: string;
-    file?: Buffer | ArrayBuffer;
+    base64?: string;
     print_setting?: PrintSettings;
     remove_temp?: boolean;
 };
