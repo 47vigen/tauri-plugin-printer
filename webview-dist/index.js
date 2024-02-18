@@ -129,10 +129,12 @@ const printFile = async (options) => {
             throw new Error("File not supported");
         }
         const filename = `${(0, nanoid_1.nanoid)()}.pdf`;
+        console.log("🚀 ~ filename:", filename);
         tempPath = await (0, core_1.invoke)("plugin:printer|create_temp_file", {
             bufferData: file.toString("base64"),
             filename
         });
+        console.log("🚀 ~ tempPath:", tempPath);
         if (!tempPath) {
             throw new Error("Fail to create temp file");
         }
