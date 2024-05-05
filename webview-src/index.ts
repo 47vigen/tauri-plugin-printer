@@ -9,7 +9,7 @@ import {
   ResponseResult,
   PrintFileOptions
 } from "./types"
-import { decodeBase64, parseIfJSON, encodeBase64 } from "utils"
+import { decodeBase64, parseIfJSON, encodeBase64 } from "./utils"
 
 /**
  * Get list printers.
