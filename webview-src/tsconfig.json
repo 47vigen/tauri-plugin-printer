@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "module": "ES6",
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "baseUrl": ".",
+    "paths": {
+      "types": ["@types"]
+    },
+    "declaration": true,
+    "outDir": "../webview-dist",
+    "declarationDir": "../webview-dist",
+    "rootDir": "./"
+  },
+  "include": ["./"],
+  "exclude": ["../webview-dist"]
+}

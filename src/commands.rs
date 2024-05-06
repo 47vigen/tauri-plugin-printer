@@ -1,4 +1,4 @@
-use crate::error::Error;
+use crate::{error::Error, PrintOptions};
 use tauri::command;
 
 #[command]
@@ -60,7 +60,7 @@ pub(crate) fn print_pdf(
     remove_after_print: bool,
 ) -> Result<String, Error> {
     if cfg!(windows) {
-        let options = crate::declare::PrintOptions {
+        let options = PrintOptions {
             id,
             path,
             print_setting: printer_setting,

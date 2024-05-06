@@ -1,0 +1,454 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PermissionFile",
+  "description": "Permission file that can define a default permission, a set of permissions or a list of inlined permissions.",
+  "type": "object",
+  "properties": {
+    "default": {
+      "description": "The default permission set for the plugin",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/DefaultPermission"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "set": {
+      "description": "A list of permissions sets defined",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PermissionSet"
+      }
+    },
+    "permission": {
+      "description": "A list of inlined permissions",
+      "default": [],
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Permission"
+      }
+    }
+  },
+  "definitions": {
+    "DefaultPermission": {
+      "description": "The default permission set of the plugin.\n\nWorks similarly to a permission with the \"default\" identifier.",
+      "type": "object",
+      "required": [
+        "permissions"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of the permission.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 1.0
+        },
+        "description": {
+          "description": "Human-readable description of what the permission does.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "permissions": {
+          "description": "All permissions this set contains.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PermissionSet": {
+      "description": "A set of direct permissions grouped together under a new name.",
+      "type": "object",
+      "required": [
+        "description",
+        "identifier",
+        "permissions"
+      ],
+      "properties": {
+        "identifier": {
+          "description": "A unique identifier for the permission.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Human-readable description of what the permission does.",
+          "type": "string"
+        },
+        "permissions": {
+          "description": "All permissions this set contains.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PermissionKind"
+          }
+        }
+      }
+    },
+    "Permission": {
+      "description": "Descriptions of explicit privileges of commands.\n\nIt can enable commands to be accessible in the frontend of the application.\n\nIf the scope is defined it can be used to fine grain control the access of individual or multiple commands.",
+      "type": "object",
+      "required": [
+        "identifier"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of the permission.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint64",
+          "minimum": 1.0
+        },
+        "identifier": {
+          "description": "A unique identifier for the permission.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Human-readable description of what the permission does.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "commands": {
+          "description": "Allowed or denied commands when using this permission.",
+          "default": {
+            "allow": [],
+            "deny": []
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/Commands"
+            }
+          ]
+        },
+        "scope": {
+          "description": "Allowed or denied scoped when using this permission.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Scopes"
+            }
+          ]
+        },
+        "platforms": {
+          "description": "Target platforms this permission applies. By default all platforms are affected by this permission.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Target"
+          }
+        }
+      }
+    },
+    "Commands": {
+      "description": "Allowed and denied commands inside a permission.\n\nIf two commands clash inside of `allow` and `deny`, it should be denied by default.",
+      "type": "object",
+      "properties": {
+        "allow": {
+          "description": "Allowed command.",
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deny": {
+          "description": "Denied command, which takes priority.",
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Scopes": {
+      "description": "A restriction of the command/endpoint functionality.\n\nIt can be of any serde serializable type and is used for allowing or preventing certain actions inside a Tauri command.\n\nThe scope is passed to the command and handled/enforced by the command itself.",
+      "type": "object",
+      "properties": {
+        "allow": {
+          "description": "Data that defines what is allowed by the scope.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Value"
+          }
+        },
+        "deny": {
+          "description": "Data that defines what is denied by the scope.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/Value"
+          }
+        }
+      }
+    },
+    "Value": {
+      "description": "All supported ACL values.",
+      "anyOf": [
+        {
+          "description": "Represents a null JSON value.",
+          "type": "null"
+        },
+        {
+          "description": "Represents a [`bool`].",
+          "type": "boolean"
+        },
+        {
+          "description": "Represents a valid ACL [`Number`].",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Number"
+            }
+          ]
+        },
+        {
+          "description": "Represents a [`String`].",
+          "type": "string"
+        },
+        {
+          "description": "Represents a list of other [`Value`]s.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Value"
+          }
+        },
+        {
+          "description": "Represents a map of [`String`] keys to [`Value`]s.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Value"
+          }
+        }
+      ]
+    },
+    "Number": {
+      "description": "A valid ACL number.",
+      "anyOf": [
+        {
+          "description": "Represents an [`i64`].",
+          "type": "integer",
+          "format": "int64"
+        },
+        {
+          "description": "Represents a [`f64`].",
+          "type": "number",
+          "format": "double"
+        }
+      ]
+    },
+    "Target": {
+      "description": "Platform target.",
+      "oneOf": [
+        {
+          "description": "MacOS.",
+          "type": "string",
+          "enum": [
+            "macOS"
+          ]
+        },
+        {
+          "description": "Windows.",
+          "type": "string",
+          "enum": [
+            "windows"
+          ]
+        },
+        {
+          "description": "Linux.",
+          "type": "string",
+          "enum": [
+            "linux"
+          ]
+        },
+        {
+          "description": "Android.",
+          "type": "string",
+          "enum": [
+            "android"
+          ]
+        },
+        {
+          "description": "iOS.",
+          "type": "string",
+          "enum": [
+            "iOS"
+          ]
+        }
+      ]
+    },
+    "PermissionKind": {
+      "type": "string",
+      "oneOf": [
+        {
+          "description": "allow-create-temp-file -> Enables the create_temp_file command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-create-temp-file"
+          ]
+        },
+        {
+          "description": "deny-create-temp-file -> Denies the create_temp_file command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-create-temp-file"
+          ]
+        },
+        {
+          "description": "allow-get-jobs -> Enables the get_jobs command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-get-jobs"
+          ]
+        },
+        {
+          "description": "deny-get-jobs -> Denies the get_jobs command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-get-jobs"
+          ]
+        },
+        {
+          "description": "allow-get-jobs-by-id -> Enables the get_jobs_by_id command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-get-jobs-by-id"
+          ]
+        },
+        {
+          "description": "deny-get-jobs-by-id -> Denies the get_jobs_by_id command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-get-jobs-by-id"
+          ]
+        },
+        {
+          "description": "allow-get-printers -> Enables the get_printers command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-get-printers"
+          ]
+        },
+        {
+          "description": "deny-get-printers -> Denies the get_printers command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-get-printers"
+          ]
+        },
+        {
+          "description": "allow-get-printers-by-name -> Enables the get_printers_by_name command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-get-printers-by-name"
+          ]
+        },
+        {
+          "description": "deny-get-printers-by-name -> Denies the get_printers_by_name command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-get-printers-by-name"
+          ]
+        },
+        {
+          "description": "allow-pause-job -> Enables the pause_job command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-pause-job"
+          ]
+        },
+        {
+          "description": "deny-pause-job -> Denies the pause_job command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-pause-job"
+          ]
+        },
+        {
+          "description": "allow-print-pdf -> Enables the print_pdf command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-print-pdf"
+          ]
+        },
+        {
+          "description": "deny-print-pdf -> Denies the print_pdf command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-print-pdf"
+          ]
+        },
+        {
+          "description": "allow-remove-job -> Enables the remove_job command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-remove-job"
+          ]
+        },
+        {
+          "description": "deny-remove-job -> Denies the remove_job command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-remove-job"
+          ]
+        },
+        {
+          "description": "allow-remove-temp-file -> Enables the remove_temp_file command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-remove-temp-file"
+          ]
+        },
+        {
+          "description": "deny-remove-temp-file -> Denies the remove_temp_file command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-remove-temp-file"
+          ]
+        },
+        {
+          "description": "allow-restart-job -> Enables the restart_job command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-restart-job"
+          ]
+        },
+        {
+          "description": "deny-restart-job -> Denies the restart_job command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-restart-job"
+          ]
+        },
+        {
+          "description": "allow-resume-job -> Enables the resume_job command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "allow-resume-job"
+          ]
+        },
+        {
+          "description": "deny-resume-job -> Denies the resume_job command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "deny-resume-job"
+          ]
+        }
+      ]
+    }
+  }
+}

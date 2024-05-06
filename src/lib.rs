@@ -1,15 +1,34 @@
 use tauri::{
     plugin::{Builder, TauriPlugin},
-    Runtime,
+    Manager, Runtime,
 };
 
+pub use models::*;
+
+#[cfg(desktop)]
+mod desktop;
+
 mod commands;
-mod declare;
 mod error;
 mod fsys;
+mod models;
 mod windows;
 
 pub use error::{Error, Result};
+
+#[cfg(desktop)]
+use desktop::Printer;
+
+/// Extensions to [`tauri::App`], [`tauri::AppHandle`] and [`tauri::Window`] to access the printer APIs.
+pub trait PrinterExt<R: Runtime> {
+    fn printer(&self) -> &Printer<R>;
+}
+
+impl<R: Runtime, T: Manager<R>> crate::PrinterExt<R> for T {
+    fn printer(&self) -> &Printer<R> {
+        self.state::<Printer<R>>().inner()
+    }
+}
 
 /// Initializes the plugin.
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
@@ -27,7 +46,11 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
             commands::pause_job,
             commands::remove_job,
         ])
-        .setup(|_app, _api| {
+        .setup(|app, api| {
+            #[cfg(desktop)]
+            let printer = desktop::init(app, api)?;
+            app.manage(printer);
+
             if cfg!(windows) {
                 let _ = windows::init_windows();
             }

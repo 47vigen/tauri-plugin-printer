@@ -18,7 +18,7 @@ Install the Core plugin by adding the following to your `Cargo.toml` file:
 
 ```toml
 [dependencies]
-tauri-plugin-printer = { git = "https://github.com/47vigen/tauri-plugin-printer", tag = "v3.0.0" }
+tauri-plugin-printer = { git = "https://github.com/47vigen/tauri-plugin-printer", tag = "v4.0.0" }
 ```
 
 Use in `src-tauri/src/main.rs`:
@@ -39,9 +39,9 @@ fn main() {
 `Install from a tagged release`
 
 ```
-npm install github:47vigen/tauri-plugin-printer#v3.0.0
+npm install github:47vigen/tauri-plugin-printer#v4.0.0
 # or
-yarn add github:47vigen/tauri-plugin-printer#v3.0.0
+yarn add github:47vigen/tauri-plugin-printer#v4.0.0
 ```
 
 `Install from a branch (dev)`
@@ -56,7 +56,7 @@ yarn add https://github.com/47vigen/tauri-plugin-printer\#master
 
 ```json
   "dependencies": {
-    "tauri-plugin-printer-api": "github:47vigen/tauri-plugin-printer#v3.0.0",
+    "tauri-plugin-printer-api": "github:47vigen/tauri-plugin-printer#v4.0.0",
   }
 ```
 

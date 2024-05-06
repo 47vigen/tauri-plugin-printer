@@ -1,9 +1,9 @@
 /// <reference types="node" />
-export type ScaleOption = "noscale" | "shrink" | "fit";
-export type MethodOption = "duplex" | "duplexshort" | "simplex";
-export type PaperOption = "A2" | "A3" | "A4" | "A5" | "A6" | "letter" | "legal" | "tabloid";
-export type OrientationOption = "portrait" | "landscape";
-export type Printer = {
+export declare type ScaleOption = "noscale" | "shrink" | "fit";
+export declare type MethodOption = "duplex" | "duplexshort" | "simplex";
+export declare type PaperOption = "A2" | "A3" | "A4" | "A5" | "A6" | "letter" | "legal" | "tabloid";
+export declare type OrientationOption = "portrait" | "landscape";
+export declare type Printer = {
     id: string;
     name: string;
     driver_name: string;
@@ -17,12 +17,12 @@ export type Printer = {
     type: number;
     priority: number;
 };
-export type ColorType = "color" | "monochrome";
-export type RangeOptions = {
+export declare type ColorType = "color" | "monochrome";
+export declare type RangeOptions = {
     from: number;
     to: number;
 };
-export type PrintSettings = {
+export declare type PrintSettings = {
     paper?: PaperOption;
     method?: MethodOption;
     scale?: ScaleOption;
@@ -31,7 +31,7 @@ export type PrintSettings = {
     repeat?: Number;
     range?: RangeOptions | string;
 };
-export type PrintFileOptions = {
+export declare type PrintFileOptions = {
     id?: string;
     name?: string;
     path?: string;
@@ -39,12 +39,12 @@ export type PrintFileOptions = {
     print_setting?: PrintSettings;
     remove_temp?: boolean;
 };
-export type JobsStatus = {
+export declare type JobsStatus = {
     code: number;
     name: string;
     description: string;
 };
-export type Jobs = {
+export declare type Jobs = {
     job_status: JobsStatus;
     computer_name: string;
     data_type: string;
@@ -61,7 +61,7 @@ export type Jobs = {
     total_pages: number;
     username: string;
 };
-export type ResponseResult = {
+export declare type ResponseResult = {
     message: string | undefined;
     success: boolean;
 };

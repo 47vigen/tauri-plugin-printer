@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.jobStatus = void 0;
-exports.jobStatus = {
+export const jobStatus = {
     512: {
         name: "Completed",
         description: "An error condition, possibly on a print job that precedes this one in the queue, blocked the print job."

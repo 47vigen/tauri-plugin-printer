@@ -1,5 +1,5 @@
 use crate::error::Error;
-use crate::{declare::PrintOptions, fsys::remove_file};
+use crate::{fsys::remove_file, models::PrintOptions};
 use std::env;
 use std::fs::File;
 use std::io::Write;
