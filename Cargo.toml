@@ -1,10 +1,9 @@
 [package]
 name = "tauri-plugin-printer"
-version = "4.1.0"
+version = "4.2.0"
 authors = [ "47vigen" ]
 description = ""
 edition = "2021"
-rust-version = "1.70"
 exclude = ["/examples", "/webview-dist", "/webview-src", "/node_modules"]
 links = "tauri-plugin-printer"
 
