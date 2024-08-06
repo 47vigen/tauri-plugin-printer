@@ -1,16 +1,16 @@
 [package]
 name = "tauri-plugin-printer"
-version = "4.3.0"
+version = "4.4.0"
 authors = [ "47vigen" ]
 edition = "2021"
 exclude = ["/examples", "/webview-dist", "/webview-src", "/node_modules"]
 links = "tauri-plugin-printer"
 
 [dependencies]
-tauri = { version = "2.0.0-beta" }
+tauri = { version = "2.0.0-rc" }
 serde = "1.0"
 thiserror = "1.0"
 base64 = "0.22.1"
 
 [build-dependencies]
-tauri-plugin = { version = "2.0.0-beta.1", features = ["build"] }
+tauri-plugin = { version = "2.0.0-rc", features = ["build"] }
