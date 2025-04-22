@@ -1,4 +1,5 @@
 import { Jobs, Printer, ResponseResult, PrintFileOptions } from "./types";
+export type * from "./types";
 /**
  * Get list printers.
  *

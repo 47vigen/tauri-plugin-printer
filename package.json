@@ -1,6 +1,6 @@
 {
   "name": "tauri-plugin-printer-api",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "author": "47vigen",
   "description": "A Tauri plugin for printing PDF files",
   "type": "module",

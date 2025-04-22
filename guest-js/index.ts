@@ -11,6 +11,8 @@ import {
 } from "./types"
 import { decodeBase64, parseIfJSON, encodeBase64 } from "./utils"
 
+export type * from "./types"
+
 /**
  * Get list printers.
  *
