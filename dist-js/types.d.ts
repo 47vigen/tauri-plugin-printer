@@ -1,9 +1,8 @@
-/// <reference types="node" />
-export declare type ScaleOption = "noscale" | "shrink" | "fit";
-export declare type MethodOption = "duplex" | "duplexshort" | "simplex";
-export declare type PaperOption = "A2" | "A3" | "A4" | "A5" | "A6" | "letter" | "legal" | "tabloid";
-export declare type OrientationOption = "portrait" | "landscape";
-export declare type Printer = {
+export type ScaleOption = "noscale" | "shrink" | "fit";
+export type MethodOption = "duplex" | "duplexshort" | "simplex";
+export type PaperOption = "A2" | "A3" | "A4" | "A5" | "A6" | "letter" | "legal" | "tabloid";
+export type OrientationOption = "portrait" | "landscape";
+export type Printer = {
     id: string;
     name: string;
     driver_name: string;
@@ -17,12 +16,12 @@ export declare type Printer = {
     type: number;
     priority: number;
 };
-export declare type ColorType = "color" | "monochrome";
-export declare type RangeOptions = {
+export type ColorType = "color" | "monochrome";
+export type RangeOptions = {
     from: number;
     to: number;
 };
-export declare type PrintSettings = {
+export type PrintSettings = {
     paper?: PaperOption;
     method?: MethodOption;
     scale?: ScaleOption;
@@ -31,7 +30,7 @@ export declare type PrintSettings = {
     repeat?: Number;
     range?: RangeOptions | string;
 };
-export declare type PrintFileOptions = {
+export type PrintFileOptions = {
     id?: string;
     name?: string;
     path?: string;
@@ -39,12 +38,12 @@ export declare type PrintFileOptions = {
     print_setting?: PrintSettings;
     remove_temp?: boolean;
 };
-export declare type JobsStatus = {
+export type JobsStatus = {
     code: number;
     name: string;
     description: string;
 };
-export declare type Jobs = {
+export type Jobs = {
     job_status: JobsStatus;
     computer_name: string;
     data_type: string;
@@ -61,7 +60,7 @@ export declare type Jobs = {
     total_pages: number;
     username: string;
 };
-export declare type ResponseResult = {
+export type ResponseResult = {
     message: string | undefined;
     success: boolean;
 };

@@ -49,7 +49,7 @@
           "minimum": 1.0
         },
         "description": {
-          "description": "Human-readable description of what the permission does. Tauri convention is to use <h4> headings in markdown content for Tauri documentation generation purposes.",
+          "description": "Human-readable description of what the permission does. Tauri convention is to use `<h4>` headings in markdown content for Tauri documentation generation purposes.",
           "type": [
             "string",
             "null"
@@ -111,7 +111,7 @@
           "type": "string"
         },
         "description": {
-          "description": "Human-readable description of what the permission does. Tauri internal convention is to use <h4> headings in markdown content for Tauri documentation generation purposes.",
+          "description": "Human-readable description of what the permission does. Tauri internal convention is to use `<h4>` headings in markdown content for Tauri documentation generation purposes.",
           "type": [
             "string",
             "null"
@@ -295,158 +295,136 @@
       "type": "string",
       "oneOf": [
         {
-          "description": "allow-create-temp-file -> Enables the create_temp_file command without any pre-configured scope.",
+          "description": "Enables the create_temp_file command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-create-temp-file"
-          ]
+          "const": "allow-create-temp-file",
+          "markdownDescription": "Enables the create_temp_file command without any pre-configured scope."
         },
         {
-          "description": "deny-create-temp-file -> Denies the create_temp_file command without any pre-configured scope.",
+          "description": "Denies the create_temp_file command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-create-temp-file"
-          ]
+          "const": "deny-create-temp-file",
+          "markdownDescription": "Denies the create_temp_file command without any pre-configured scope."
         },
         {
-          "description": "allow-get-jobs -> Enables the get_jobs command without any pre-configured scope.",
+          "description": "Enables the get_jobs command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-get-jobs"
-          ]
+          "const": "allow-get-jobs",
+          "markdownDescription": "Enables the get_jobs command without any pre-configured scope."
         },
         {
-          "description": "deny-get-jobs -> Denies the get_jobs command without any pre-configured scope.",
+          "description": "Denies the get_jobs command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-get-jobs"
-          ]
+          "const": "deny-get-jobs",
+          "markdownDescription": "Denies the get_jobs command without any pre-configured scope."
         },
         {
-          "description": "allow-get-jobs-by-id -> Enables the get_jobs_by_id command without any pre-configured scope.",
+          "description": "Enables the get_jobs_by_id command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-get-jobs-by-id"
-          ]
+          "const": "allow-get-jobs-by-id",
+          "markdownDescription": "Enables the get_jobs_by_id command without any pre-configured scope."
         },
         {
-          "description": "deny-get-jobs-by-id -> Denies the get_jobs_by_id command without any pre-configured scope.",
+          "description": "Denies the get_jobs_by_id command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-get-jobs-by-id"
-          ]
+          "const": "deny-get-jobs-by-id",
+          "markdownDescription": "Denies the get_jobs_by_id command without any pre-configured scope."
         },
         {
-          "description": "allow-get-printers -> Enables the get_printers command without any pre-configured scope.",
+          "description": "Enables the get_printers command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-get-printers"
-          ]
+          "const": "allow-get-printers",
+          "markdownDescription": "Enables the get_printers command without any pre-configured scope."
         },
         {
-          "description": "deny-get-printers -> Denies the get_printers command without any pre-configured scope.",
+          "description": "Denies the get_printers command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-get-printers"
-          ]
+          "const": "deny-get-printers",
+          "markdownDescription": "Denies the get_printers command without any pre-configured scope."
         },
         {
-          "description": "allow-get-printers-by-name -> Enables the get_printers_by_name command without any pre-configured scope.",
+          "description": "Enables the get_printers_by_name command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-get-printers-by-name"
-          ]
+          "const": "allow-get-printers-by-name",
+          "markdownDescription": "Enables the get_printers_by_name command without any pre-configured scope."
         },
         {
-          "description": "deny-get-printers-by-name -> Denies the get_printers_by_name command without any pre-configured scope.",
+          "description": "Denies the get_printers_by_name command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-get-printers-by-name"
-          ]
+          "const": "deny-get-printers-by-name",
+          "markdownDescription": "Denies the get_printers_by_name command without any pre-configured scope."
         },
         {
-          "description": "allow-pause-job -> Enables the pause_job command without any pre-configured scope.",
+          "description": "Enables the pause_job command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-pause-job"
-          ]
+          "const": "allow-pause-job",
+          "markdownDescription": "Enables the pause_job command without any pre-configured scope."
         },
         {
-          "description": "deny-pause-job -> Denies the pause_job command without any pre-configured scope.",
+          "description": "Denies the pause_job command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-pause-job"
-          ]
+          "const": "deny-pause-job",
+          "markdownDescription": "Denies the pause_job command without any pre-configured scope."
         },
         {
-          "description": "allow-print-pdf -> Enables the print_pdf command without any pre-configured scope.",
+          "description": "Enables the print_pdf command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-print-pdf"
-          ]
+          "const": "allow-print-pdf",
+          "markdownDescription": "Enables the print_pdf command without any pre-configured scope."
         },
         {
-          "description": "deny-print-pdf -> Denies the print_pdf command without any pre-configured scope.",
+          "description": "Denies the print_pdf command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-print-pdf"
-          ]
+          "const": "deny-print-pdf",
+          "markdownDescription": "Denies the print_pdf command without any pre-configured scope."
         },
         {
-          "description": "allow-remove-job -> Enables the remove_job command without any pre-configured scope.",
+          "description": "Enables the remove_job command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-remove-job"
-          ]
+          "const": "allow-remove-job",
+          "markdownDescription": "Enables the remove_job command without any pre-configured scope."
         },
         {
-          "description": "deny-remove-job -> Denies the remove_job command without any pre-configured scope.",
+          "description": "Denies the remove_job command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-remove-job"
-          ]
+          "const": "deny-remove-job",
+          "markdownDescription": "Denies the remove_job command without any pre-configured scope."
         },
         {
-          "description": "allow-remove-temp-file -> Enables the remove_temp_file command without any pre-configured scope.",
+          "description": "Enables the remove_temp_file command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-remove-temp-file"
-          ]
+          "const": "allow-remove-temp-file",
+          "markdownDescription": "Enables the remove_temp_file command without any pre-configured scope."
         },
         {
-          "description": "deny-remove-temp-file -> Denies the remove_temp_file command without any pre-configured scope.",
+          "description": "Denies the remove_temp_file command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-remove-temp-file"
-          ]
+          "const": "deny-remove-temp-file",
+          "markdownDescription": "Denies the remove_temp_file command without any pre-configured scope."
         },
         {
-          "description": "allow-restart-job -> Enables the restart_job command without any pre-configured scope.",
+          "description": "Enables the restart_job command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-restart-job"
-          ]
+          "const": "allow-restart-job",
+          "markdownDescription": "Enables the restart_job command without any pre-configured scope."
         },
         {
-          "description": "deny-restart-job -> Denies the restart_job command without any pre-configured scope.",
+          "description": "Denies the restart_job command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-restart-job"
-          ]
+          "const": "deny-restart-job",
+          "markdownDescription": "Denies the restart_job command without any pre-configured scope."
         },
         {
-          "description": "allow-resume-job -> Enables the resume_job command without any pre-configured scope.",
+          "description": "Enables the resume_job command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "allow-resume-job"
-          ]
+          "const": "allow-resume-job",
+          "markdownDescription": "Enables the resume_job command without any pre-configured scope."
         },
         {
-          "description": "deny-resume-job -> Denies the resume_job command without any pre-configured scope.",
+          "description": "Denies the resume_job command without any pre-configured scope.",
           "type": "string",
-          "enum": [
-            "deny-resume-job"
-          ]
+          "const": "deny-resume-job",
+          "markdownDescription": "Denies the resume_job command without any pre-configured scope."
         }
       ]
     }
